@@ -1,7 +1,8 @@
 "use client";
 
-import { blogPosts } from "@/lib/posts";
+import { blogPosts } from "@/lib/supabase";
 import Link from "next/link";
+import React from "react";
 
 export default function BlogList() {
   return (
