@@ -1,6 +1,6 @@
 "use client";
 
-import { blogPosts } from "@/lib/supabase";
+import { blogPosts } from "@/lib/posts";
 import Link from "next/link";
 import React from "react";
 

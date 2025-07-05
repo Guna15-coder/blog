@@ -5,11 +5,18 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import dynamic from "next/dynamic";
 
+type PageProps = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
 // Dynamically import MDXContent
 const MDXContent = dynamic(() => import("@/components/MDXContent"), { ssr: true });
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
   if (!post) return notFound();
 
   const mdxSource = await serialize(post.content, {
@@ -53,7 +60,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               .slice(0, 3)
               .map((b) => (
                 <li key={b.id}>
-                  <a href={`/${b.slug}`} className="hover:underline text-foreground">
+                  <a href={`/blog/${b.slug}`} className="hover:underline text-foreground">
                     {b.title}
                   </a>
                 </li>
