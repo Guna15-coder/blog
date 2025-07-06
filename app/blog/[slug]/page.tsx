@@ -4,6 +4,8 @@ import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import dynamic from "next/dynamic";
+import ScrollLinked from "@/components/ScrollLink";
+import Navbar from "@/components/Navbar";
 
 type PageProps = {
   params: Promise<{
@@ -28,8 +30,14 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <div className="flex flex-col lg:flex-row max-w-6xl mx-auto px-4 py-10 gap-8">
+        <div className="z-50">
+          <ScrollLinked />
+      </div>
+          <Navbar />
+
+
       {/* Left: Blog Content (70%) */}
-      <div className="w-full lg:w-[70%] prose dark:prose-invert text-justify">
+      <div className="w-full lg:w-[70%] mt-20 prose dark:prose-invert text-justify">
         <h1 className="text-3xl font-bold">{post.title}</h1>
         <p className="text-sm text-muted-foreground mb-4">
           {new Date(post.created_at).toLocaleDateString()}
